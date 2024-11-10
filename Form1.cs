@@ -36,13 +36,32 @@ namespace StudentManagementSystem
 			      dataGridView1.Columns[3].Name = "Course";
 		    }
 
-		private void AddStudent_Click(object sender, EventArgs e)
-        {
+				private void AddStudent_Click(object sender, EventArgs e)
+				{	
+						// Retrieve input values from text boxes
+						string studentId = textBox2.Text;
+						string name = textBox1.Text;
+						int age;
 
-        }
+						// Validatinng input values
+						if (!int.TryParse(textBox3.Text, out age) || string.IsNullOrWhiteSpace(studentId) || string.IsNullOrWhiteSpace(name))
+						{
+								MessageBox.Show("Invalid input. Please enter a valid Student ID, Name, and Age.");
+								return; // Exit if validation fails
+						}
+
+						string course = textBox4.Text; // Retrieve course
+
+						// Call the AddStudent method to add the new student
+						studentDataHandler.AddStudent(studentId, name, age, course);
+
+						// Clear input fields after adding the student
+						ClearInputFields();
+						MessageBox.Show("Student added successfully!");
+				}
 
 
-        private void ViewAllStudents_Click(object sender, EventArgs e)
+		private void ViewAllStudents_Click(object sender, EventArgs e)
         {
      
             }
@@ -77,12 +96,13 @@ namespace StudentManagementSystem
          
         }
 
-        private void ClearFields()
-        {
-            textBox2.Clear();
-            textBox1.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-        }
-    }
+				private void ClearInputFields()
+				{	
+						// Clear all input fields in the form
+						textBox2.Clear();
+						textBox1.Clear();
+						textBox3.Clear();
+						textBox4.Clear();
+				}
+		}
 }
