@@ -61,17 +61,22 @@ namespace StudentManagementSystem
 				}
 
 
-		private void ViewAllStudents_Click(object sender, EventArgs e)
-        {
-     
-            }
+				private void ViewAllStudents_Click(object sender, EventArgs e)
+				{
+						// Clear existing rows in the DataGridView
+						dataGridView1.Rows.Clear();
 
-        private void btnViewAll_Click(object sender, EventArgs e)
-        {
+						// Retrieve all students from the DataHandler
+						var students = studentDataHandler.GetAllStudents();
 
-        }
+						// Add each student to the DataGridView
+							foreach (var student in students)
+							{
+									dataGridView1.Rows.Add(student); // Add student data as a new row
+							}
+				}
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
