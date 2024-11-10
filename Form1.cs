@@ -76,12 +76,43 @@ namespace StudentManagementSystem
 							}
 				}
 
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
+				private void UpdateStudent_Click(object sender, EventArgs e)
+				{
+						// Check if a row is selected
+						if (dataGridView1.SelectedRows.Count > 0)
+						{
+								// Get the selected row
+								var selectedRow = dataGridView1.SelectedRows[0];
 
-        }
+								// Retrieve the Student ID from the selected row
+								string studentId = selectedRow.Cells[0].Value.ToString();
 
-        private void btnDelete_Click(object sender, EventArgs e)
+								// Get updated values from the text boxes
+								string name = textBox2.Text;
+								int age;
+
+								// Validate age input
+								if (!int.TryParse(textBox3.Text, out age))
+								{
+										MessageBox.Show("Please enter a valid age.");
+										return; // Exit if validation fails
+								}
+
+								string course = textBox4.Text; // Retrieve course
+
+								// Call the UpdateStudent method to update the student's information
+								studentDataHandler.UpdateStudent(studentId, name, age, course);
+
+								// Refresh the DataGrid View to show updated data
+								ViewAllStudents_Click(sender, e); // Re-fetch and display students
+						}
+						else
+						{
+								MessageBox.Show("Please select a student to update."); // Message that diplays if no student is selected
+						}
+				}
+
+		private void btnDelete_Click(object sender, EventArgs e)
         {
 
         }
