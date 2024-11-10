@@ -156,12 +156,32 @@ namespace StudentManagementSystem
 							}
 				}
 
-    
 
-        private void btnGenerateReport_Click(object sender, EventArgs e)
-        {
-         
-        }
+
+				private void GenerateReport_Click(object sender, EventArgs e)
+				{
+						// Generate a report of total students and average age
+						var report = studentDataHandler.GenerateReport();
+						int totalStudents = report.totalStudents; // Total number of students
+						double averageAge = report.averageAge; // Average age of students
+
+						// Summary message
+						string summaryMessage = $"Total Students: {totalStudents}\nAverage Age: {averageAge:F2}";
+
+						// Display summary in message box
+						MessageBox.Show(summaryMessage, "Summary Report");
+
+						// Save the summary to a file named "summary.txt"
+						string summaryFilePath = "summary.txt";
+						string summaryContent = summaryMessage;
+
+						// Write the summary to file
+						File.WriteAllText(summaryFilePath, summaryContent);
+
+						// Inform user that the summary has been saved
+						MessageBox.Show("Summary report generated and saved to summary.txt.", "Confirmation");
+
+				}
 
 				private void ClearInputFields()
 				{	
