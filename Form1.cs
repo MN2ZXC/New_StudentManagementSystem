@@ -96,7 +96,23 @@ namespace StudentManagementSystem
          
         }
 
-				private void ClearInputFields()
+				private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+				{
+						// Ensure the clicked cell is not a header and there are rows in the DataGridView
+						if (e.RowIndex >= 0 && dataGridView1.Rows.Count > 0)
+						{
+								// Get the selected row
+								var selectedRow = dataGridView1.Rows[e.RowIndex];
+
+								// Populate the text boxes with student's details
+								textBox1.Text = selectedRow.Cells[0].Value?.ToString() ?? string.Empty;
+								textBox2.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
+								textBox3.Text = selectedRow.Cells[2].Value?.ToString() ?? string.Empty;
+								textBox4.Text = selectedRow.Cells[3].Value?.ToString() ?? string.Empty;
+						}
+				}
+
+		private void ClearInputFields()
 				{	
 						// Clear all input fields in the form
 						textBox2.Clear();
