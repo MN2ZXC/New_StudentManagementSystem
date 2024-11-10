@@ -36,7 +36,23 @@ namespace StudentManagementSystem
 			      dataGridView1.Columns[3].Name = "Course";
 		    }
 
-				private void AddStudent_Click(object sender, EventArgs e)
+		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+					// Ensure the clicked cell is not a header and there are rows in the DataGridView
+					if (e.RowIndex >= 0 && dataGridView1.Rows.Count > 0)
+					{
+							// Get the selected row
+							var selectedRow = dataGridView1.Rows[e.RowIndex];
+
+							// Populate the text boxes with student's details
+							textBox1.Text = selectedRow.Cells[0].Value?.ToString() ?? string.Empty;
+							textBox2.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
+							textBox3.Text = selectedRow.Cells[2].Value?.ToString() ?? string.Empty;
+							textBox4.Text = selectedRow.Cells[3].Value?.ToString() ?? string.Empty;
+					}
+		}
+
+		private void AddStudent_Click(object sender, EventArgs e)
 				{	
 						// Retrieve input values from text boxes
 						string studentId = textBox2.Text;
@@ -112,12 +128,35 @@ namespace StudentManagementSystem
 						}
 				}
 
-		private void btnDelete_Click(object sender, EventArgs e)
-        {
+				private void DeleteStudent_Click(object sender, EventArgs e)
+						{
+							// Check if a row is selected
+							if (dataGridView1.SelectedRows.Count > 0)
+							{
+									// Get the selected row
+									var selectedRow = dataGridView1.SelectedRows[0];
 
-        }
+									// Retrieve the Student ID from the selected row
+									string studentId = selectedRow.Cells[0].Value.ToString();
 
-        private void btnAdd_Click(object sender, EventArgs e)
+									// Confirm deletion with the user
+									DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this student?", "Confirm Deletion", MessageBoxButtons.YesNo);
+									if (dialogResult == DialogResult.Yes)
+									{
+											// Call the DeleteStudent method to delete the student's information
+											studentDataHandler.DeleteStudent(studentId);
+
+											// Refresh the DataGridView to show updated data
+											ViewAllStudents_Click(sender, e); // Re-fetch and display students
+									}
+							}
+						else
+						{
+								MessageBox.Show("Please select a student to delete."); // Message shown if no student is selected
+						}
+				}
+
+		private void btnAdd_Click(object sender, EventArgs e)
         {
 
         }
@@ -127,23 +166,7 @@ namespace StudentManagementSystem
          
         }
 
-				private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-				{
-						// Ensure the clicked cell is not a header and there are rows in the DataGridView
-						if (e.RowIndex >= 0 && dataGridView1.Rows.Count > 0)
-						{
-								// Get the selected row
-								var selectedRow = dataGridView1.Rows[e.RowIndex];
-
-								// Populate the text boxes with student's details
-								textBox1.Text = selectedRow.Cells[0].Value?.ToString() ?? string.Empty;
-								textBox2.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
-								textBox3.Text = selectedRow.Cells[2].Value?.ToString() ?? string.Empty;
-								textBox4.Text = selectedRow.Cells[3].Value?.ToString() ?? string.Empty;
-						}
-				}
-
-		private void ClearInputFields()
+				private void ClearInputFields()
 				{	
 						// Clear all input fields in the form
 						textBox2.Clear();
@@ -151,5 +174,10 @@ namespace StudentManagementSystem
 						textBox3.Clear();
 						textBox4.Clear();
 				}
-		}
+
+				private void Form1_Load(object sender, EventArgs e)
+				{
+
+				}
+	}
 }
