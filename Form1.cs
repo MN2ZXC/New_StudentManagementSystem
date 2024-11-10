@@ -150,16 +150,13 @@ namespace StudentManagementSystem
 											ViewAllStudents_Click(sender, e); // Re-fetch and display students
 									}
 							}
-						else
-						{
+							else
+							{
 								MessageBox.Show("Please select a student to delete."); // Message shown if no student is selected
-						}
+							}
 				}
 
-		private void btnAdd_Click(object sender, EventArgs e)
-        {
-
-        }
+    
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
@@ -179,5 +176,5 @@ namespace StudentManagementSystem
 				{
 
 				}
-	}
+		}
 }
