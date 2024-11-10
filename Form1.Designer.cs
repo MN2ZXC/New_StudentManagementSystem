@@ -50,7 +50,7 @@ namespace StudentManagementSystem
 			// studentName
 			// 
 			this.studentName.AutoSize = true;
-			this.studentName.Location = new System.Drawing.Point(53, 64);
+			this.studentName.Location = new System.Drawing.Point(51, 29);
 			this.studentName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.studentName.Name = "studentName";
 			this.studentName.Size = new System.Drawing.Size(54, 13);
@@ -60,7 +60,7 @@ namespace StudentManagementSystem
 			// StudentID
 			// 
 			this.StudentID.AutoSize = true;
-			this.StudentID.Location = new System.Drawing.Point(53, 29);
+			this.StudentID.Location = new System.Drawing.Point(50, 67);
 			this.StudentID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.StudentID.Name = "StudentID";
 			this.StudentID.Size = new System.Drawing.Size(55, 13);
